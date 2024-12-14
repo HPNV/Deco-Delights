@@ -8,10 +8,10 @@ public class LeaveState : ICustomerState
     {
         if(customer.isServed)
         {
-            customer.ShowDialog("Thank you!");
+
         } else
         {
-            customer.ShowDialog("I'm leaving!");
+            
         }
     }
 

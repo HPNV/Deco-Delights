@@ -7,13 +7,12 @@ public class WaitState : ICustomerState
     float waitTime = 0f;
     public void EnterState(Customer customer)
     {
-        customer.ToggleRequest();
         waitTime = customer.customerData.patienceTime;
     }
 
     public void ExitState(Customer customer)
     {
-        customer.ToggleRequest();
+
     }
 
     public void UpdateState(Customer customer)
