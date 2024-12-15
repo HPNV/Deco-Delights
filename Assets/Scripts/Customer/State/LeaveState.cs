@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class LeaveState : ICustomerState
 {
+    float LeaveTime = 0f;
     public void EnterState(Customer customer)
     {
-        if(customer.isServed)
-        {
-
-        } else
-        {
-            
-        }
+        customer.Leave();
     }
 
     public void ExitState(Customer customer)
     {
-        customer.Leave();
+        
     }
 
     public void UpdateState(Customer customer)

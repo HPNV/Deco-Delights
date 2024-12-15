@@ -88,4 +88,15 @@ public class QueueManager : MonoBehaviour
             customers[i].transform.position = queuePositions[i];
         }
     }
+
+    public void CheckCake(string cake) {
+        foreach (GameObject customer in customers) {
+            Customer customerComponent = customer.GetComponent<Customer>();
+            if (customerComponent.GetRequest().Equals(cake) && !customerComponent.isServed) {
+                customerComponent.isServed = true;
+                WorkSpaceManager.Instance.ResetCake();
+                break;
+            }
+        }
+    }
 }

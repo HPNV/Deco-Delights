@@ -8,6 +8,7 @@ public class EatState : ICustomerState
     public void EnterState(Customer customer)
     {
         eatTime = customer.customerData.eatTime;
+        customer.requestUI.SetActive(false);
     }
 
     public void ExitState(Customer customer)

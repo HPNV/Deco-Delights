@@ -11,7 +11,7 @@ public class Customer : MonoBehaviour
     public bool isServed = false;
     private SpriteRenderer spriteRenderer;
     private string request;
-    [SerializeField] private GameObject requestUI;
+    [SerializeField] public GameObject requestUI;
 
     private void Start()
     {
@@ -52,6 +52,6 @@ public class Customer : MonoBehaviour
 
     public void Leave()
     {
-        Destroy(gameObject);
+        QueueManager.Instance.RemoveCustomer(this.gameObject);
     }
 }

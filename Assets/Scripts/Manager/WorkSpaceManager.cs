@@ -24,6 +24,24 @@ public class WorkSpaceManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Update()
+    {
+        CheckCake();
+    }
+
+    public void CheckCake() {
+        if(cakePrefab.baseRenderer.sprite != null && cakePrefab.toppingRenderer.sprite != null && cakePrefab.creamRenderer.sprite != null) {
+            QueueManager.Instance.CheckCake(cakePrefab.cakeString());
+        }
+    }
+
+
+    public void ResetCake() {
+        cakePrefab.baseRenderer.sprite = null;
+        cakePrefab.toppingRenderer.sprite = null;
+        cakePrefab.creamRenderer.sprite = null;
+    }
+
     public void SetBase1() {
         Debug.Log("SetBase1");
         cakePrefab.baseRenderer.sprite = baseSprite1;
