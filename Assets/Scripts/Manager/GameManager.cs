@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject queueManagerPrefab;
     [SerializeField] private GameObject orderManagerPrefab;
     [SerializeField] private GameObject workSpaceManagerPrefab;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    private int score = 0;
 
     private void Awake()
     {
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -39,5 +43,10 @@ public class GameManager : MonoBehaviour
             GameObject managerInstance = Instantiate(managerPrefab);
             managerInstance.name = managerName;
         }
+    }
+
+    public void UpdateScore() {
+        score += 100;
+        scoreText.text = score.ToString();
     }
 }

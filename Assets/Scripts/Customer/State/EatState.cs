@@ -9,6 +9,7 @@ public class EatState : ICustomerState
     {
         eatTime = customer.customerData.eatTime;
         customer.requestUI.SetActive(false);
+        customer.SetSliderMaxValue(eatTime);
     }
 
     public void ExitState(Customer customer)
@@ -19,6 +20,7 @@ public class EatState : ICustomerState
     public void UpdateState(Customer customer)
     {
         eatTime -= Time.deltaTime;
+        customer.SetSliderValue(eatTime);
         if (eatTime <= 0)
         {
             customer.customerStateManager.SetState(new LeaveState(), customer);

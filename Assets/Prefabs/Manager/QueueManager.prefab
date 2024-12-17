@@ -52,3 +52,5 @@ MonoBehaviour:
   spawnDelay: 2
   customerDatabase:
   - {fileID: 11400000, guid: cbf8a03f3dda14c4d917cf09b4a2ec3b, type: 2}
+  - {fileID: 11400000, guid: 4a157df3072db3948a6a44abc2d50c8c, type: 2}
+  - {fileID: 11400000, guid: a1fc3e2528d1c934a9d6a8e7a2e888e4, type: 2}

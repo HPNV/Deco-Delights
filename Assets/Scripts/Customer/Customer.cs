@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Customer : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private string request;
     [SerializeField] public GameObject requestUI;
+    [SerializeField] private Slider slider;
 
     private void Start()
     {
@@ -53,5 +55,15 @@ public class Customer : MonoBehaviour
     public void Leave()
     {
         QueueManager.Instance.RemoveCustomer(this.gameObject);
+    }
+
+    public void SetSliderValue(float value)
+    {
+        slider.value = value;
+    }
+
+    public void SetSliderMaxValue(float value)
+    {
+        slider.maxValue = value;
     }
 }
