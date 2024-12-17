@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class LeaveState : ICustomerState
 {
+    float LeaveTime = 0f;
     public void EnterState(Customer customer)
     {
-        if(customer.isServed)
-        {
-            customer.ShowDialog("Thank you!");
-        } else
-        {
-            customer.ShowDialog("I'm leaving!");
+        if(customer.isServed) {
+            GameManager.Instance.UpdateScore();
         }
+        customer.Leave();
     }
 
     public void ExitState(Customer customer)
     {
-        customer.Leave();
+        
     }
 
     public void UpdateState(Customer customer)

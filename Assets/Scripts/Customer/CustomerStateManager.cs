@@ -16,6 +16,7 @@ public class CustomerStateManager : MonoBehaviour
     public void UpdateState(Customer customer)
     {
         currentState?.UpdateState(customer);
+        Debug.Log(currentState);
     }
 
     public ICustomerState GetCurrentState()

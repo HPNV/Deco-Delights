@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    [Header("Manager Prefabs")]
+    [SerializeField] private GameObject queueManagerPrefab;
+    [SerializeField] private GameObject orderManagerPrefab;
+    [SerializeField] private GameObject workSpaceManagerPrefab;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    private int score = 0;
 
     private void Awake()
     {
@@ -13,6 +21,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -21,9 +30,23 @@ public class GameManager : MonoBehaviour
 
     private void InitializeManagers()
     {
-        if(OrderManager.Instance == null)
+        EnsureManagerExists(queueManagerPrefab);
+        EnsureManagerExists(orderManagerPrefab);
+        EnsureManagerExists(workSpaceManagerPrefab);
+    }
+
+    private void EnsureManagerExists(GameObject managerPrefab)
+    {
+        string managerName = managerPrefab.name;
+        if (GameObject.Find(managerName) == null)
         {
-            new GameObject("OrderManager").AddComponent<OrderManager>();
+            GameObject managerInstance = Instantiate(managerPrefab);
+            managerInstance.name = managerName;
         }
+    }
+
+    public void UpdateScore() {
+        score += 100;
+        scoreText.text = score.ToString();
     }
 }

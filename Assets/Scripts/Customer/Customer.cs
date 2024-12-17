@@ -2,25 +2,33 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
     public CustomerData customerData;
     public CustomerStateManager customerStateManager;
     public bool isServed = false;
-
-    [Header("Bubble Chat Settings")]
-    public GameObject chatBubblePrefab;
-    public Transform bubblePosition;
-    public float fadeDuration = 1f;
-    public float displayDuration = 3f;
-    private GameObject activeBubble;
-    private String request;
+    private SpriteRenderer spriteRenderer;
+    private string request;
+    [SerializeField] public GameObject requestUI;
+    [SerializeField] private Slider slider;
 
     private void Start()
     {
+        this.AddComponent<CustomerStateManager>();
+        customerStateManager = GetComponent<CustomerStateManager>();
         customerStateManager.SetState(new WaitState(), this);
-        request = GetRequest();
+        request = SetRequest(OrderManager.Instance.GenerateRandomOrder());
+    }
+
+    public void SetData(CustomerData data)
+    {
+        customerData = data;
+        this.AddComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = data.customerSprite;
     }
 
     private void Update()
@@ -28,54 +36,34 @@ public class Customer : MonoBehaviour
         customerStateManager.UpdateState(this);
     }
 
-    public void ShowDialog(string message)
+    public string SetRequest(GameObject cake)
     {
-        if (activeBubble != null) Destroy(activeBubble);
-
-        activeBubble = Instantiate(chatBubblePrefab, bubblePosition.position, Quaternion.identity, transform);
-        TextMeshProUGUI textComponent = activeBubble.GetComponentInChildren<TextMeshProUGUI>();
-        if (textComponent != null)
-        {
-            textComponent.text = message;
-        }
-
-        StartCoroutine(FadeOutBubble(activeBubble, displayDuration, fadeDuration));
+        Cake newCake = cake.GetComponent<Cake>();
+        requestUI.GetComponent<CakeRequest>().SetCake(cake);
+        return newCake.cakeString();
     }
 
-    private IEnumerator FadeOutBubble(GameObject bubble, float delay, float fadeDuration)
-    {
-        yield return new WaitForSeconds(delay);
+    void ShowCake() {
 
-        CanvasGroup canvasGroup = bubble.GetComponent<CanvasGroup>();
-        if (canvasGroup != null)
-        {
-            float elapsed = 0f;
-
-            while (elapsed < fadeDuration)
-            {
-                elapsed += Time.deltaTime;
-                canvasGroup.alpha = Mathf.Lerp(1, 0, elapsed / fadeDuration);
-                yield return null;
-            }
-
-            canvasGroup.alpha = 0;
-        }
-
-        Destroy(bubble);
     }
 
-    public void ToggleRequest()
-    {
-        if (activeBubble != null) Destroy(activeBubble);
-    }
-
-    public String GetRequest()
+    public string GetRequest()
     {
         return request;
     }
 
     public void Leave()
     {
-        Destroy(gameObject);
+        QueueManager.Instance.RemoveCustomer(this.gameObject);
+    }
+
+    public void SetSliderValue(float value)
+    {
+        slider.value = value;
+    }
+
+    public void SetSliderMaxValue(float value)
+    {
+        slider.maxValue = value;
     }
 }
