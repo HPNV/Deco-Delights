@@ -14,6 +14,8 @@ public class LifeManager : MonoBehaviour
     private int lifeCount;
     private List<GameObject> lifeIcons = new List<GameObject>();
 
+    [SerializeField] private GameObject LoseScreen; // Ensure this is assigned in the Inspector.
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,6 +30,10 @@ public class LifeManager : MonoBehaviour
     private void Start()
     {
         InitializeLives();
+        if (LoseScreen != null)
+        {
+            LoseScreen.SetActive(false);
+        }
     }
 
     private void InitializeLives()
@@ -52,14 +58,14 @@ public class LifeManager : MonoBehaviour
             lifeIcons.Add(lifeIcon);
         }
     }
+
     private Vector3 CalculateLifeIconPosition(int index)
     {
-        Debug.Log(index);
-        Debug.Log(iconSpacing);
         float xPosition = initialPosition.transform.position.x - (index * iconSpacing);
         float yPosition = initialPosition.transform.position.y;
-        return new Vector3(xPosition,yPosition,0);
+        return new Vector3(xPosition, yPosition, 0);
     }
+
     public void ReduceLife()
     {
         if (lifeCount <= 0) return;
@@ -72,6 +78,7 @@ public class LifeManager : MonoBehaviour
             GameOver();
         }
     }
+
     private void DestroyLifeIcon()
     {
         if (lifeIcons.Count > 0)
@@ -90,6 +97,27 @@ public class LifeManager : MonoBehaviour
 
     private void GameOver()
     {
+        if (LoseScreen != null)
+        {
+            LoseScreen.SetActive(true);
+        }
+
+        Time.timeScale = 0;
+
+        StartCoroutine(QuitAfterDelay(5f));
+    }
+
+    private IEnumerator QuitAfterDelay(float delay)
+    {
+        Time.timeScale = 0;
+        float realTimePassed = 0f;
+
+        while (realTimePassed < delay)
+        {
+            realTimePassed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
         Application.Quit();
     }
 }
