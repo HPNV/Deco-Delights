@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject queueManagerPrefab;
     [SerializeField] private GameObject orderManagerPrefab;
     [SerializeField] private GameObject workSpaceManagerPrefab;
+    [SerializeField] private GameObject lifeManagerPrefab;
     [SerializeField] private TextMeshProUGUI scoreText;
     private int score = 0;
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         EnsureManagerExists(queueManagerPrefab);
         EnsureManagerExists(orderManagerPrefab);
         EnsureManagerExists(workSpaceManagerPrefab);
+        EnsureManagerExists(lifeManagerPrefab);
     }
 
     private void EnsureManagerExists(GameObject managerPrefab)

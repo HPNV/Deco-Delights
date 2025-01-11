@@ -681,6 +681,7 @@ MonoBehaviour:
   queueManagerPrefab: {fileID: 6757059224007477867, guid: 255cac50e369ffa4fa647bce47cae9ff, type: 3}
   orderManagerPrefab: {fileID: 6620450426481536816, guid: 0abdf28dea94a7149a9ee0647dff5070, type: 3}
   workSpaceManagerPrefab: {fileID: 2306566429333559329, guid: baf13abbd1f0b174e9915c5ae9a5fa72, type: 3}
+  lifeManagerPrefab: {fileID: 2746347369035417690, guid: 51ed5272ef7d182468fb850a2f26e55f, type: 3}
   scoreText: {fileID: 2068694708}
 --- !u!82 &1206756474
 AudioSource:

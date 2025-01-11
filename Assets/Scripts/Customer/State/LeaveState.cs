@@ -9,6 +9,8 @@ public class LeaveState : ICustomerState
     {
         if(customer.isServed) {
             GameManager.Instance.UpdateScore();
+        } else {
+            LifeManager.Instance.ReduceLife();
         }
         customer.Leave();
     }
