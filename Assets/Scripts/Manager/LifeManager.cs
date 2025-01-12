@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeManager : MonoBehaviour
 {
@@ -119,5 +120,8 @@ public class LifeManager : MonoBehaviour
         }
 
         Application.Quit();
+        //SceneManager.LoadScene(1);
     }
+
+
 }

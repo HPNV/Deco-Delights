@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Lolly
   m_EditorClassIdentifier: 
   customerName: Lolly
-  customerSprite: {fileID: -1299695445, guid: 7f691aa41b65f5041bf8240bf9c0a8d5, type: 3}
+  customerSprite: {fileID: -1454379464, guid: 68bddfc90f010384d9f8da3bbfd25978, type: 3}
   patienceTime: 10
   eatTime: 4
