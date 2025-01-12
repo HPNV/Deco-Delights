@@ -15,7 +15,8 @@ public class LifeManager : MonoBehaviour
     private int lifeCount;
     private List<GameObject> lifeIcons = new List<GameObject>();
 
-    [SerializeField] private GameObject LoseScreen; // Ensure this is assigned in the Inspector.
+    [SerializeField] private GameObject LoseScreen;
+    [SerializeField] private GameObject MainMenuButton;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class LifeManager : MonoBehaviour
         if (LoseScreen != null)
         {
             LoseScreen.SetActive(false);
+            MainMenuButton.SetActive(false);
         }
     }
 
@@ -101,6 +103,7 @@ public class LifeManager : MonoBehaviour
         if (LoseScreen != null)
         {
             LoseScreen.SetActive(true);
+            MainMenuButton.SetActive(true);
         }
 
         Time.timeScale = 0;

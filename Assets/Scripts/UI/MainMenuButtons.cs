@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class MainMenuButtons : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject LoseScreen;
+    public GameObject MainMenuButton;
+
     void Start()
     {
         
@@ -19,12 +22,26 @@ public class MainMenuButtons : MonoBehaviour
 
     public void PlayGame()
     {
+      
         SceneManager.LoadSceneAsync(1);
+        
+
     }
 
-    public void Settings()
+    public void MainMenu()
     {
+        LoseScreen.SetActive(false);
+        MainMenuButton.SetActive(false);
+        SceneManager.LoadSceneAsync(0);
+        
+    }
 
+    public void Reset()
+    {
+        LoseScreen.SetActive(false);
+        MainMenuButton.SetActive(false);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
